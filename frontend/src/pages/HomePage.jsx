@@ -19,13 +19,6 @@ const HomePage = ({ agency }) => {
   const videoRef = useRef(null);
   const viewTracked = useRef(false);
 
-  // Cover the iframe briefly on mount to hide the YouTube title overlay flash
-  useEffect(() => {
-    setVideoReady(false);
-    const t = setTimeout(() => setVideoReady(true), 1500);
-    return () => clearTimeout(t);
-  }, []);
-
   const heroImages = agency?.hero_images?.length > 0 ? agency.hero_images : [DEFAULT_HERO_IMAGE];
   const videoUrl = agency?.hero_video_url || '';
 
@@ -47,10 +40,15 @@ const HomePage = ({ agency }) => {
   };
 
   // Force-resume the YouTube hero video if YouTube pauses it (e.g. after ads/buffering),
-  // so mobile control overlays stay hidden.
+  // so mobile control overlays stay hidden. Also keeps a cover overlay visible until the
+  // video is actually PLAYING, so the YouTube center play button never shows.
   useEffect(() => {
+    setVideoReady(false);
     const videoId = getYouTubeVideoId(videoUrl);
-    if (!videoId) return;
+    if (!videoId) {
+      setVideoReady(true);
+      return;
+    }
 
     let player;
     const ensureApi = () =>
@@ -70,6 +68,9 @@ const HomePage = ({ agency }) => {
       });
 
     let cancelled = false;
+    // Fallback in case the YouTube API never fires PLAYING (e.g. autoplay blocked).
+    const fallback = setTimeout(() => setVideoReady(true), 3000);
+
     ensureApi().then((YT) => {
       if (cancelled) return;
       const iframe = document.getElementById('hero-youtube-player');
@@ -77,6 +78,11 @@ const HomePage = ({ agency }) => {
       player = new YT.Player(iframe, {
         events: {
           onStateChange: (e) => {
+            if (e.data === YT.PlayerState.PLAYING) {
+              // Brief beat after PLAYING — YouTube reports PLAYING before the
+              // play-button overlay actually disappears from the iframe.
+              setTimeout(() => setVideoReady(true), 500);
+            }
             if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
               try { e.target.playVideo(); } catch (_) { /* ignore */ }
             }
@@ -87,6 +93,7 @@ const HomePage = ({ agency }) => {
 
     return () => {
       cancelled = true;
+      clearTimeout(fallback);
       try { player?.destroy(); } catch (_) { /* ignore */ }
     };
   }, [videoUrl]);
@@ -180,13 +187,13 @@ const HomePage = ({ agency }) => {
               allowFullScreen
               title="Hero Video"
             />
-            {/* Black cover to hide YouTube title overlay flash on initial load */}
+            {/* Black cover to hide YouTube play button / title overlay until the video is actually playing. */}
             <div
               className="absolute inset-0 transition-opacity duration-700 pointer-events-none"
               style={{
                 backgroundColor: '#000',
                 opacity: videoReady ? 0 : 1,
-                zIndex: 1,
+                zIndex: 6,
               }}
               aria-hidden="true"
             />
