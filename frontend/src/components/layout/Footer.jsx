@@ -53,14 +53,14 @@ const Footer = ({ agency }) => {
             
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link 
+              {/* <Link 
                 to="/vende-con-nosotros" 
                 className="inline-flex items-center justify-center px-6 py-3 font-semibold text-white transition-all hover:opacity-90"
                 style={{ backgroundColor: '#C5A059' }}
                 data-testid="sell-with-us-btn"
               >
                 Vende tu Propiedad
-              </Link>
+              </Link> */}
               <Link 
                 to="/trabaja-con-nosotros" 
                 className="inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-green-600 hover:bg-green-700 transition-all"
