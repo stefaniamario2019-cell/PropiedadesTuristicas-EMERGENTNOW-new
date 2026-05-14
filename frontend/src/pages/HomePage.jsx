@@ -361,7 +361,7 @@ const HomePage = ({ agency }) => {
               <h3 className="text-xl font-bold text-slate-900 mb-2" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                 {agency?.feature1_title || 'Experiencia Comprobada'}
               </h3>
-              <p className="text-stone-600">{agency?.feature1_description || 'Más de 15 años de experiencia en el mercado inmobiliario dominicano.'}</p>
+              <p className="text-stone-600">{agency?.feature1_description || 'Más de 5 años de experiencia en el mercado inmobiliario dominicano.'}</p>
             </div>
             <div className="text-center p-6">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center">
