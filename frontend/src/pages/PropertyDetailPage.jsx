@@ -106,20 +106,20 @@ const PropertyDetailPage = ({ agency }) => {
   }
 
   return (
-    <div data-testid="property-detail-page" className="min-h-screen bg-stone-50 pt-20 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
-        <Link to="/propiedades" className="inline-flex items-center gap-2 text-stone-600 hover:text-slate-900 transition-colors">
+    <div data-testid="property-detail-page" className="min-h-screen bg-stone-50 pt-16 md:pt-20 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-6">
+        <Link to="/propiedades" className="inline-flex items-center gap-2 text-stone-600 hover:text-slate-900 transition-colors text-sm md:text-base">
           <ArrowLeft className="h-4 w-4" />Volver a propiedades
         </Link>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-8 md:pb-16">
         <div className="grid lg:grid-cols-3 gap-6 md:gap-12">
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-5 md:space-y-8">
             {/* Main Image with fixed height */}
-            <div 
-              className="relative overflow-hidden cursor-pointer group" 
-              style={{ aspectRatio: '16/10', minHeight: '300px' }}
+            <div
+              className="relative overflow-hidden cursor-pointer group"
+              style={{ aspectRatio: '16/10' }}
               onClick={() => openLightbox(0)}
             >
               <img src={property.images?.[0]?.url || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800'} alt={property.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -178,7 +178,7 @@ const PropertyDetailPage = ({ agency }) => {
             </div>
 
             {property.images?.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
                 {property.images.slice(1, 5).map((image, index) => (
                   <div key={index} className="aspect-square overflow-hidden cursor-pointer group" onClick={() => openLightbox(index + 1)}>
                     <img src={image.url} alt={image.alt || `Imagen ${index + 2}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
@@ -199,29 +199,29 @@ const PropertyDetailPage = ({ agency }) => {
                 <p className="hidden md:block font-heading text-2xl sm:text-3xl md:text-4xl font-bold whitespace-nowrap" style={{ color: '#C5A059' }}>{formatPrice(property.price, property.currency)}</p>
               </div>
 
-              <div className="flex flex-wrap gap-4 md:gap-6 py-6 border-y border-stone-200">
+              <div className="grid grid-cols-3 sm:flex sm:flex-wrap gap-3 sm:gap-4 md:gap-6 py-4 md:py-6 border-y border-stone-200">
                 {property.bedrooms > 0 && (
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-stone-100 flex items-center justify-center flex-shrink-0"><Bed className="h-5 w-5 md:h-6 md:w-6 text-slate-900" /></div>
-                    <div><p className="text-xl md:text-2xl font-semibold text-slate-900">{property.bedrooms}</p><p className="text-xs md:text-sm text-stone-500">Habitaciones</p></div>
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-stone-100 flex items-center justify-center flex-shrink-0"><Bed className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-slate-900" /></div>
+                    <div className="min-w-0"><p className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-900 leading-none">{property.bedrooms}</p><p className="text-[11px] sm:text-xs md:text-sm text-stone-500 truncate">Habitaciones</p></div>
                   </div>
                 )}
                 {property.bathrooms > 0 && (
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-stone-100 flex items-center justify-center flex-shrink-0"><Bath className="h-5 w-5 md:h-6 md:w-6 text-slate-900" /></div>
-                    <div><p className="text-xl md:text-2xl font-semibold text-slate-900">{property.bathrooms}</p><p className="text-xs md:text-sm text-stone-500">Banos</p></div>
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-stone-100 flex items-center justify-center flex-shrink-0"><Bath className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-slate-900" /></div>
+                    <div className="min-w-0"><p className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-900 leading-none">{property.bathrooms}</p><p className="text-[11px] sm:text-xs md:text-sm text-stone-500 truncate">Banos</p></div>
                   </div>
                 )}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-stone-100 flex items-center justify-center flex-shrink-0"><Square className="h-5 w-5 md:h-6 md:w-6 text-slate-900" /></div>
-                  <div><p className="text-xl md:text-2xl font-semibold text-slate-900">{property.area}</p><p className="text-xs md:text-sm text-stone-500">m2</p></div>
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-stone-100 flex items-center justify-center flex-shrink-0"><Square className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-slate-900" /></div>
+                  <div className="min-w-0"><p className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-900 leading-none">{property.area}</p><p className="text-[11px] sm:text-xs md:text-sm text-stone-500 truncate">m2</p></div>
                 </div>
               </div>
 
-              <div className="py-6">
-                <h2 className="font-heading text-xl font-semibold text-slate-900 mb-4">Descripcion</h2>
+              <div className="py-5 md:py-6">
+                <h2 className="font-heading text-lg md:text-xl font-semibold text-slate-900 mb-3 md:mb-4">Descripcion</h2>
                 <p
-                  className="text-stone-600 leading-relaxed whitespace-pre-line break-words"
+                  className="text-stone-600 leading-relaxed whitespace-pre-line break-words text-sm md:text-base"
                   style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}
                 >
                   {property.description}
@@ -229,42 +229,42 @@ const PropertyDetailPage = ({ agency }) => {
               </div>
 
               {property.amenities?.length > 0 && (
-                <div className="py-6 border-t border-stone-200">
-                  <h2 className="font-heading text-xl font-semibold text-slate-900 mb-4">Amenidades</h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div className="py-5 md:py-6 border-t border-stone-200">
+                  <h2 className="font-heading text-lg md:text-xl font-semibold text-slate-900 mb-3 md:mb-4">Amenidades</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
                     {property.amenities.map((amenity, index) => (
-                      <div key={index} className="flex items-center gap-2 text-stone-600">
-                        <Check className="h-4 w-4" style={{ color: '#C5A059' }} /><span>{amenity}</span>
+                      <div key={index} className="flex items-center gap-2 text-stone-600 text-sm md:text-base">
+                        <Check className="h-4 w-4 flex-shrink-0" style={{ color: '#C5A059' }} /><span className="break-words">{amenity}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
-              <div className="py-6 border-t border-stone-200">
-                <h2 className="font-heading text-xl font-semibold text-slate-900 mb-4">Ubicacion</h2>
+              <div className="py-5 md:py-6 border-t border-stone-200">
+                <h2 className="font-heading text-lg md:text-xl font-semibold text-slate-900 mb-3 md:mb-4">Ubicacion</h2>
                 <PropertyMap 
                   latitude={property.latitude} 
                   longitude={property.longitude}
                   title={property.title}
                   location={property.location}
                 />
-                <p className="text-stone-600 mt-3 flex items-center gap-2">
-                  <MapPin className="h-4 w-4" style={{ color: '#C5A059' }} />
-                  {property.address || property.location}
+                <p className="text-stone-600 mt-3 flex items-start gap-2 text-sm md:text-base break-words">
+                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: '#C5A059' }} />
+                  <span className="break-words">{property.address || property.location}</span>
                 </p>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-6">
-              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" data-testid="whatsapp-property-btn" className="flex items-center justify-center gap-3 w-full py-4 bg-green-500 hover:bg-green-600 text-white font-semibold transition-all">
+            <div className="lg:sticky lg:top-24 space-y-4 md:space-y-6">
+              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" data-testid="whatsapp-property-btn" className="flex items-center justify-center gap-3 w-full py-3 md:py-4 bg-green-500 hover:bg-green-600 text-white font-semibold transition-all text-sm md:text-base">
                 <WhatsAppIcon />Contactar por WhatsApp
               </a>
 
-              <div className="bg-white p-6 shadow-lg border border-stone-100">
-                <h3 className="font-heading text-xl font-semibold text-slate-900 mb-6">Solicitar Informacion</h3>
+              <div className="bg-white p-4 md:p-6 shadow-lg border border-stone-100">
+                <h3 className="font-heading text-lg md:text-xl font-semibold text-slate-900 mb-4 md:mb-6">Solicitar Informacion</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div><Label htmlFor="name">Nombre *</Label><Input id="name" data-testid="contact-name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-1.5 bg-stone-50" /></div>
                   <div><Label htmlFor="email">Email *</Label><Input id="email" type="email" data-testid="contact-email" value={formData.email} onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))} required className="mt-1.5 bg-stone-50" /></div>
@@ -272,10 +272,10 @@ const PropertyDetailPage = ({ agency }) => {
                   <div><Label htmlFor="message">Mensaje *</Label><Textarea id="message" data-testid="contact-message" value={formData.message} onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))} required rows={4} className="mt-1.5 bg-stone-50" /></div>
                   <Button type="submit" data-testid="contact-submit" disabled={submitting} className="w-full py-3 text-white font-semibold" style={{ backgroundColor: '#0F172A' }}>{submitting ? 'Enviando...' : 'Enviar Mensaje'}</Button>
                 </form>
-                <Separator className="my-6" />
+                <Separator className="my-5 md:my-6" />
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-stone-600"><Phone className="h-5 w-5" style={{ color: '#C5A059' }} /><span>{agency?.phone || '+18098475498'}</span></div>
-                  <div className="flex items-center gap-3 text-stone-600"><Mail className="h-5 w-5" style={{ color: '#C5A059' }} /><span>{agency?.email || 'info@propiedadesturisticasrd.com'}</span></div>
+                  <div className="flex items-center gap-3 text-stone-600 text-sm md:text-base"><Phone className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" style={{ color: '#C5A059' }} /><span className="break-all">{agency?.phone || '+18098475498'}</span></div>
+                  <div className="flex items-center gap-3 text-stone-600 text-sm md:text-base"><Mail className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" style={{ color: '#C5A059' }} /><span className="break-all">{agency?.email || 'info@propiedadesturisticasrd.com'}</span></div>
                 </div>
               </div>
             </div>
@@ -285,11 +285,11 @@ const PropertyDetailPage = ({ agency }) => {
 
       {lightboxOpen && property.images && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center" onClick={() => setLightboxOpen(false)}>
-          <button className="absolute top-4 right-4 text-white hover:text-stone-300 z-10" onClick={() => setLightboxOpen(false)}><X className="h-8 w-8" /></button>
-          <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-stone-300 z-10 p-2" onClick={(e) => { e.stopPropagation(); prevImage(); }}><ChevronLeft className="h-10 w-10" /></button>
-          <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-stone-300 z-10 p-2" onClick={(e) => { e.stopPropagation(); nextImage(); }}><ChevronRight className="h-10 w-10" /></button>
-          <img src={property.images[currentImageIndex]?.url} alt="Property" className="max-w-[90vw] max-h-[90vh] object-contain" onClick={(e) => e.stopPropagation()} />
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white">{currentImageIndex + 1} / {property.images.length}</div>
+          <button className="absolute top-3 right-3 md:top-4 md:right-4 text-white hover:text-stone-300 z-10 p-1" onClick={() => setLightboxOpen(false)}><X className="h-7 w-7 md:h-8 md:w-8" /></button>
+          <button className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-white hover:text-stone-300 z-10 p-2 bg-black/40 rounded-full" onClick={(e) => { e.stopPropagation(); prevImage(); }}><ChevronLeft className="h-7 w-7 md:h-10 md:w-10" /></button>
+          <button className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 text-white hover:text-stone-300 z-10 p-2 bg-black/40 rounded-full" onClick={(e) => { e.stopPropagation(); nextImage(); }}><ChevronRight className="h-7 w-7 md:h-10 md:w-10" /></button>
+          <img src={property.images[currentImageIndex]?.url} alt="Property" className="max-w-[92vw] max-h-[85vh] md:max-w-[90vw] md:max-h-[90vh] object-contain" onClick={(e) => e.stopPropagation()} />
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm md:text-base">{currentImageIndex + 1} / {property.images.length}</div>
         </div>
       )}
     </div>
