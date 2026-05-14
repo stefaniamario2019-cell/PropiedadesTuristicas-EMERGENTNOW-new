@@ -56,7 +56,7 @@ const AboutPage = ({ agency }) => {
                 Nuestra Historia
               </p>
               <h2 className="font-heading text-2xl md:text-3xl font-semibold text-slate-900 mb-6" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                {agency?.about_description || 'Más de 15 años transformando sueños en hogares'}
+                {agency?.about_description || 'Más de 5 años transformando sueños en hogares'}
               </h2>
               <p className="text-stone-600 leading-relaxed">
                 Somos una empresa dedicada a ofrecer las mejores propiedades en República Dominicana. 
